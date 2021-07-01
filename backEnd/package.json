@@ -1,0 +1,11 @@
+{
+  "name": "monitor",
+  "version": "1.0.0",
+  "description": "Group Project – Integrative Programming",
+  "main": "server.js",
+  "scripts": {
+    
+  },
+  "author": "",
+  "license": "ISC"
+}
