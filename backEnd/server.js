@@ -1,10 +1,13 @@
 const express = require('express')
 const app = express()
 const mongoose = require('mongoose')
+
+const readingRoute= require('./routes/reading')
 const sensorRoute = require('./routes/sensor')
 
 app.use(express.json())
 app.use('/sensor', sensorRoute)
+app.use('/reading', readingRoute)
 
 
 
