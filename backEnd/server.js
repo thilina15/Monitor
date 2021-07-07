@@ -5,6 +5,7 @@ const sensorRoute = require('./routes/sensor')
 
 app.use(express.json())
 app.use('/sensor', sensorRoute)
+app.use('/user')
 
 
 
