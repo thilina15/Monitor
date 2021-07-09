@@ -1,13 +1,15 @@
 const sensor = require('../models/sensor')
+const {sendAlert} = require('../services/alert')
 
 exports.addReading=async(req,res)=>{
     
     try{
-        sensorOB = await sensor.findById(req.body.sensor_id)
+        var sensorOB = await sensor.findById(req.body.sensor_id)
         //compair reading value and threshold
         var feedback="normal"
         if((req.body.data_value)>(sensorOB.threshold)){
             feedback="alert"
+            sendAlert(sensorOB)
             
         }
         sensorOB.readings.push({
