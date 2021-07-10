@@ -1,5 +1,6 @@
 import React, {Component} from 'react';
 import axios from 'axios';
+import { Link } from 'react-router-dom';
 
 export default class Login extends Component{
     constructor(props){
@@ -7,7 +8,8 @@ export default class Login extends Component{
         
         this.state = {
             email:'',
-            password:''
+            password:'',
+            err:''
         }
     }
     //email saving
@@ -35,22 +37,37 @@ export default class Login extends Component{
             if(res.data.jwt){
                 localStorage.setItem('user',res.data.jwt)
                 console.log('user logined');
-                console.log(res.data.jwt)
+                this.props.history.push('/charts')
             }else{
                 console.log('invalid login details');
+                this.setState({
+                    err:'invalid login details',
+                    email:'',
+                    password:''
+                })
             }
         })
         .catch(er=>console.log(er))
-        //window.location = '/';
     }
     render(){
         return(
             <div>
+                <p>New User? <Link to="/signup" >Sign up</Link></p>
+                
                 <form onSubmit={this.onSubmit}>
-                    Email: <input type="email" value={this.state.email} onChange={this.onChangeEmail}/>
-                    password: <input type="password" value={this.state.password} onChange={this.onChangePassword}/>
-                    <input type="submit"/>
+                    <div className='form-froup'>
+                        <label>Email</label>
+                        <input type="email" className='form-control' value={this.state.email} onChange={this.onChangeEmail}/>
+                    </div>
+                    <div className='form-froup'>
+                        <label>Password</label>
+                        <input type="password" className='form-control' value={this.state.password} onChange={this.onChangePassword}/>
+                    </div>
+                    <br></br>
+                    <input className='btn btn-success' type="submit"/>
                 </form>
+                <p style={{color: "red"}}>{this.state.err}</p>
+                
             </div>
             
         )

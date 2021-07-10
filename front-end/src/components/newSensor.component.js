@@ -1,6 +1,7 @@
 import React, {Component} from 'react';
 import axios from 'axios';
 import jwtDecode from 'jwt-decode'
+import Navbar from "./navbar.component";
 
 export default class NewSensor extends Component{
     constructor(props){
@@ -54,9 +55,15 @@ export default class NewSensor extends Component{
         
         return(
             <div>
+                <Navbar/>
+                <br></br>
                 <form onSubmit={this.onSubmit}>
-                    Threshold: <input type="number" value={this.state.threshold} onChange={this.onThresholdChanged}/>
-                    <input type="submit"/>
+                    <div className='form-group'>
+                        <label>Threshold</label>
+                        <input type="number" value={this.state.threshold} onChange={this.onThresholdChanged} className='form-control' />
+                    </div>
+                    <br></br>
+                    <button type="submit" className='btn btn-success' >Ad Sensor</button>
                 </form>
                 <p>this is your sensor id: {this.state.sensorID}</p>
             </div>

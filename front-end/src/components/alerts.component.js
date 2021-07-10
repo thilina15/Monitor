@@ -1,6 +1,7 @@
 import React, {Component} from 'react';
 import axios from 'axios';
 import jwtDecode from 'jwt-decode'
+import Navbar from "./navbar.component";
 
 export default class Alerts extends Component{
     constructor(props){
@@ -55,23 +56,38 @@ export default class Alerts extends Component{
         
         return(
             <div>
-                <select value={this.state.sensorID} onChange={this.onChangeSensor}>
-                    {this.state.sensors.map((sensor)=>{
-                        return <option value={sensor._id}>{sensor._id}</option>
-                    })}
-                </select>
-                <table>
-                    <tr>
-                        <th>
-                            value
-                        </th>
-                        <th>
-                            time
-                        </th>
-                    </tr>
-                    {this.state.alerts.map((alert)=>{
-                        return <tr><td>{alert.value}</td><td>{alert.time}</td></tr>
-                    })}
+                <Navbar/>
+                <br></br>
+                <div className='col-md-5'>
+                    <select value={this.state.sensorID} onChange={this.onChangeSensor} className='form-control'>
+                        <option>Select Sensor</option>
+                        {this.state.sensors.map((sensor)=>{
+                            return <option value={sensor._id}>Sensor ID: {sensor._id}</option>
+                        })}
+                    </select>
+                </div>
+                
+                <table className="table">
+                    <thead className="thead-dark">
+                        <tr>
+                            <th scope='col'>
+                                Temp Value
+                            </th>
+                            <th scope='col'>
+                                Date
+                            </th>
+                            <th scope='col'>
+                                Time
+                            </th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        {this.state.alerts.map((alert)=>{
+                            return <tr><td>{alert.value}C</td><td>{new Date(alert.time).toLocaleDateString()}</td>
+                            <td>{new Date(alert.time).toLocaleTimeString()}</td>
+                            </tr>
+                        })}
+                    </tbody>
                 </table>
             </div>
         )

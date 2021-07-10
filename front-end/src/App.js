@@ -10,17 +10,19 @@ import alerts from './components/alerts.component';
 import newSensor from './components/newSensor.component';
 import updateUser from './components/updateUser.component';
 
-function App() {
+function App(props) {
   return (
     <Router>
-      <Navbar/>
+      {/* <Navbar/> */}
       <br/>
-      <Route path="/login" component={Login}/>
+      {/* <Route path="/login" component={Login}/> */}
       <Route path="/signup" component={signUp}/>
       <Route path="/charts" component={charts}/>
       <Route path="/alerts" component={alerts}/>
       <Route path="/addSensor" component={newSensor}/>
       <Route path="/updateUser" component={updateUser}/>
+      <Route exact path="/" component={Login}/>
+    
     </Router>
     
   );

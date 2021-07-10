@@ -12,11 +12,20 @@ exports.addReading=async(req,res)=>{
             sendAlert(sensorOB)
             
         }
-        sensorOB.readings.push({
-            value:req.body.data_value,
-            feedback:feedback,
-            time:new Date(req.body.date)
-        })
+        if(req.body.date){
+            sensorOB.readings.push({
+                value:req.body.data_value,
+                feedback:feedback,
+                time:new Date(req.body.date)
+            })
+        }else{
+            sensorOB.readings.push({
+                value:req.body.data_value,
+                feedback:feedback,
+                time:new Date().toLocaleString('en-US', { timeZone: 'Asia/India' })
+            })
+        }
+        
         await sensorOB.save()
         res.status(200).send('reading added')
     }catch(e){
