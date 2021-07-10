@@ -12,7 +12,7 @@ exports.sendAlert=async(sensorOB)=>{
     
     switch (notificationChannel) {
         case 'email':
-            emailAlert()
+            emailAlert(userOB.email)
             break;
         case 'call':
             callAlert()
