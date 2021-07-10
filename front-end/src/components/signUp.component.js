@@ -1,4 +1,5 @@
 import React, {Component} from 'react';
+import axios from 'axios'
 
 export default class signUp extends Component{
     
@@ -61,7 +62,9 @@ export default class signUp extends Component{
             mobile:this.state.mobile,
             notificationChannel:this.state.notificationChannel
         }
-        console.log(user)
+        axios.post('http://localhost:5000/user',user)
+        .then(res=>console.log(res))
+        .catch(er=>console.log(er))
     }
 
     render(){
@@ -70,7 +73,12 @@ export default class signUp extends Component{
                 <form onSubmit={this.onSubmit}>
                     Name: <input type="text" value={this.state.name} onChange={this.onChangeName}/>
                     Mobile: <input type="text" value={this.state.mobile} onChange={this.onChangeMobile}/>
-                    Notification Channel: <input type="text" value={this.state.notificationChannel} onChange={this.onChangeNotificationChannel}/>
+                    Notification Channel:
+                    <select value={this.state.notificationChannel} onChange={this.onChangeNotificationChannel}>
+                        <option value="email">Email</option>
+                        <option value="sms">SMS</option>
+                        <option value="call">Call</option>
+                    </select>
                     Email: <input type="text" value={this.state.email} onChange={this.onChangeEmail}/>
                     password: <input type="password" value={this.state.password} onChange={this.onChangePassword}/>
                     <input type="submit"/>
