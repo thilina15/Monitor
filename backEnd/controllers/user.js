@@ -1,4 +1,5 @@
 const user = require('../models/user')
+const jwt = require('jsonwebtoken')
 
 
 exports.registerUser = (req,res)=>{
@@ -25,9 +26,10 @@ exports.loginUser = (req,res)=>{
     user.findOne({email:req.body.email, password:req.body.password})
     .then((ob)=>{
         if(ob){
-            res.status(200).send('user loged in')
+            const jwtToken = jwt.sign({userID:ob._id},'jwtKey')
+            res.status(200).header('x-auth-token',jwtToken).json({jwt:jwtToken})
         }else{
-            res.status(200).send('wrong login details')
+            res.status(200).send('fail')
         }   
     })
     .catch(e=>{
@@ -47,6 +49,7 @@ exports.allUsers = (req,res)=>{
 }
 
 exports.updateUser = (req,res)=>{
+    console.log('in put')
     //update login
     user.findById(req.body.id)
     .then(ob=>{
@@ -58,12 +61,25 @@ exports.updateUser = (req,res)=>{
         ob.save()
         .then(savedUser=>{
             res.status(200).send('used updated..')
+            console.log('user updated');
         })
         .catch(e=>{
             res.status(400).send('cannot update the user')
+            console.log('user error');
         })
     })
     .catch(e=>{
         res.status(400).send('cannot find user')
+    })
+}
+
+exports.getUser = (req,res)=>{
+    //get user details
+    user.findById(req.params.userID)
+    .then(ob=>{
+        res.status(200).json(ob)
+    })
+    .catch(e=>{
+        res.status(400).send('error')
     })
 }

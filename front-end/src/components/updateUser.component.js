@@ -1,20 +1,47 @@
 import React, {Component} from 'react';
-import axios from 'axios'
+import axios from 'axios';
+import jwtDecode from 'jwt-decode'
 
-export default class SignUp extends Component{
-    
+export default class UpdateUser extends Component{
     constructor(props){
         super(props);
-
+        
         this.state = {
             name:'',
             email:'',
             password:'',
             mobile:'',
-            notificationChannel:''
+            notificationChannel:'',
+            userID:'',
+            feedback:''
         }
     }
+    componentDidMount=()=>{
+        const jwt = localStorage.getItem('user')
+        if(jwt){
+            this.setState({
+                userID:jwtDecode(jwt).userID
+            })
+            console.log(jwtDecode(jwt).userID)
+        }
 
+        axios.get(`http://localhost:5000/user/${jwtDecode(jwt).userID}`)
+        .then(res=>{
+            this.setState({
+                name:res.data.name,
+                email:res.data.email,
+                password:res.data.password,
+                mobile:res.data.mobile,
+                notificationChannel:res.data.notificationChannel,
+            })
+            console.log(res.data);
+        })
+        .catch(e=>{
+            console.log(e)
+        })   
+    }
+
+    
     //set Email
     onChangeEmail=(e)=>{
         this.setState({
@@ -49,18 +76,24 @@ export default class SignUp extends Component{
     onSubmit=(e)=>{
         e.preventDefault();
         const user ={
+            id:this.state.userID,
             email:this.state.email,
             password:this.state.password,
             name:this.state.name,
             mobile:this.state.mobile,
             notificationChannel:this.state.notificationChannel
         }
-        axios.post('http://localhost:5000/user',user)
-        .then(res=>console.log(res))
+        axios.put('http://localhost:5000/user',user)
+        .then(res=>{
+            this.setState({
+                feedback:res.data
+            })
+        })
         .catch(er=>console.log(er))
     }
-
+    
     render(){
+        
         return(
             <div>
                 <form onSubmit={this.onSubmit}>

@@ -8,7 +8,7 @@ exports.registerSensor = async(req,res) => {
     })
     try{
         const ob = await sensorOB.save()
-        res.status(200).send(ob)
+        res.status(200).json({sensorID:ob.id})
     }catch(e){
         res.status(400).send('Sensor creation failure')
     }
@@ -18,7 +18,7 @@ exports.allSensors = async(req,res) => {
     //get all the sensors for a user
     try{
         const sensors = await sensor.find({user:req.params.userID})
-        res.status(200).send(sensors)
+        res.status(200).json({sensors:sensors})
     }catch(e){
         res.status(400).send('Sensors not found')
     }

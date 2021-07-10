@@ -29,10 +29,17 @@ export default class Login extends Component{
             email:this.state.email,
             password:this.state.password
         }
-        console.log(user)
         
     axios.post('http://localhost:5000/user/login',user)
-        .then(res=>console.log(res))
+        .then(res=>{
+            if(res.data.jwt){
+                localStorage.setItem('user',res.data.jwt)
+                console.log('user logined');
+                console.log(res.data.jwt)
+            }else{
+                console.log('invalid login details');
+            }
+        })
         .catch(er=>console.log(er))
         //window.location = '/';
     }

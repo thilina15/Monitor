@@ -33,3 +33,14 @@ exports.getReadings=async(req,res)=>{
         values:readings
     })
 }
+
+exports.getAlerts = async(req,res)=>{
+    const sensorOB = await sensor.findById(req.params.sensorID)
+    const alerts =[] 
+    sensorOB.readings.forEach(reading=>{
+        if(reading.feedback=='alert'){
+            alerts.push(reading)
+        }
+    })
+    res.status(200).json({alerts:alerts})
+}
