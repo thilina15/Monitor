@@ -23,3 +23,13 @@ exports.addReading=async(req,res)=>{
         res.status(400).send('try again')
     }
 }
+
+
+
+exports.getReadings=async(req,res)=>{
+    const sensorOB = await sensor.findById(req.params.sensorID)
+    const readings = sensorOB.readings
+    res.status(200).json({
+        values:readings
+    })
+}

@@ -4,10 +4,6 @@ import axios from 'axios';
 export default class Login extends Component{
     constructor(props){
         super(props);
-
-        this.onChangeEmail = this.onChangeEmail.bind(this);
-        this.onChangePassword = this.onChangePassword.bind(this);
-        this.onSubmit = this.onSubmit.bind(this);
         
         this.state = {
             email:'',
@@ -15,19 +11,19 @@ export default class Login extends Component{
         }
     }
     //email saving
-    onChangeEmail(e){
+    onChangeEmail=(e)=>{
         this.setState({
             email:e.target.value
         });
     }
     //password saving
-    onChangePassword(e){
+    onChangePassword = (e)=>{
         this.setState({
             password:e.target.value
         });
     }
     //login 
-    onSubmit(e){
+    onSubmit = (e) => {
         e.preventDefault();
         const user ={
             email:this.state.email,

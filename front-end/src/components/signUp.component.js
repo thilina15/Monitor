@@ -6,13 +6,6 @@ export default class signUp extends Component{
     constructor(props){
         super(props);
 
-        this.onChangeEmail = this.onChangeEmail.bind(this);
-        this.onChangePassword = this.onChangePassword.bind(this);
-        this.onChangeMobile = this.onChangeMobile.bind(this);
-        this.onChangeName = this.onChangeName.bind(this)
-        this.onChangeNotificationChannel = this.onChangeNotificationChannel.bind(this);
-        this.onSubmit = this.onSubmit.bind(this)
-
         this.state = {
             name:'',
             email:'',
@@ -23,37 +16,37 @@ export default class signUp extends Component{
     }
 
     //set Email
-    onChangeEmail(e){
+    onChangeEmail=(e)=>{
         this.setState({
             email:e.target.value
         });
     }
     //set password
-    onChangePassword(e){
+    onChangePassword=(e)=>{
         this.setState({
             password:e.target.value
         });
     }
     //set name
-    onChangeName(e){
+    onChangeName=(e)=>{
         this.setState({
             name:e.target.value
         });
     }
     //set mobile
-    onChangeMobile(e){
+    onChangeMobile=(e)=>{
         this.setState({
             mobile:e.target.value
         });
     }
     //set notification channel
-    onChangeNotificationChannel(e){
+    onChangeNotificationChannel=(e)=>{
         this.setState({
             notificationChannel:e.target.value
         });
     }
     //sign up 
-    onSubmit(e){
+    onSubmit=(e)=>{
         e.preventDefault();
         const user ={
             email:this.state.email,

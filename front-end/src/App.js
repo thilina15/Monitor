@@ -5,6 +5,7 @@ import {BrowserRouter as Router, Route} from "react-router-dom";
 import Login from "./components/login.component"
 import Navbar from "./components/navbar.component"
 import signUp from './components/signUp.component';
+import charts from './components/charts.component';
 
 function App() {
   return (
@@ -13,6 +14,7 @@ function App() {
       <br/>
       <Route path="/login" component={Login}/>
       <Route path="/signup" component={signUp}/>
+      <Route path="/charts" component={charts}/>
     </Router>
     
   );
