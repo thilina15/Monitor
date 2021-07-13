@@ -63,7 +63,7 @@ export default class NewSensor extends Component{
                         <input type="number" value={this.state.threshold} onChange={this.onThresholdChanged} className='form-control' />
                     </div>
                     <br></br>
-                    <button type="submit" className='btn btn-success' >Ad Sensor</button>
+                    <button type="submit" className='btn btn-success' >Add Sensor</button>
                 </form>
                 <p>this is your sensor id: {this.state.sensorID}</p>
             </div>

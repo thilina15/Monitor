@@ -22,7 +22,7 @@ exports.addReading=async(req,res)=>{
             sensorOB.readings.push({
                 value:req.body.data_value,
                 feedback:feedback,
-                time:new Date().toLocaleString('en-US', { timeZone: 'Asia/India' })
+                time:new Date()//.toLocaleString('en-US', { timeZone: 'Asia/India' })
             })
         }
         
@@ -51,5 +51,6 @@ exports.getAlerts = async(req,res)=>{
             alerts.push(reading)
         }
     })
-    res.status(200).json({alerts:alerts})
+    const alertsReversed = alerts.reverse()
+    res.status(200).json({alerts:alertsReversed})
 }

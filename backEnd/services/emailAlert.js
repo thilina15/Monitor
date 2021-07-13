@@ -17,7 +17,7 @@ exports.emailAlert=(email)=>{
         from: process.env.EMAIL,
         to: email,
         subject: "sessor fail alert",
-        text:'sample'
+        text:'one of your sensor got failed.. login to your account and check more about this failure..'
     }
     transpoter.sendMail(mailOptions,(err,info)=>{
         if(err){

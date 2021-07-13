@@ -60,6 +60,7 @@ export default class Charts extends Component{
     }
     
     render(){
+        console.log('rendered',this.state.readings);
         
         return(
             <div>
